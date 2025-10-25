@@ -1,50 +1,86 @@
-{% extends 'base.html'  %}
-
-{% block main %}
-
 <!-- ===== NAVBAR SECTION ===== -->
-<header class="navbar-dark bg-black sticky-top">
-  <div class="container-fluid py-2 text-center text-white border-bottom border-warning">
-    <span>✨ Book & Get Free Sample Today!</span>
+<header class="main-navbar fixed-top">
+  <!-- Top bar -->
+  <div class="top-bar text-center text-white py-1 border-bottom border-warning">
+    <span>✨ Fall Sale: Save ₹200 On HoneyMix Gift Packs!</span>
   </div>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black bg-opacity-75 backdrop-blur">
+  <!-- Social + Language/Currency -->
+  <div class="container-fluid d-flex justify-content-between align-items-center px-4 py-2 small text-white social-bar">
+    <div class="d-flex align-items-center gap-3">
+      <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="text-white"><i class="bi bi-twitter-x"></i></a>
+    </div>
+
+    <div class="d-flex align-items-center gap-3">
+      <div class="dropdown">
+        <a class="dropdown-toggle text-white text-decoration-none" href="#" role="button" data-bs-toggle="dropdown">EN</a>
+        <ul class="dropdown-menu dropdown-menu-dark bg-black">
+          <li><a class="dropdown-item text-white" href="#">EN</a></li>
+          <li><a class="dropdown-item text-white" href="#">TA</a></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <a class="dropdown-toggle text-white text-decoration-none" href="#" role="button" data-bs-toggle="dropdown">USD, $</a>
+        <ul class="dropdown-menu dropdown-menu-dark bg-black">
+          <li><a class="dropdown-item text-white" href="#">INR ₹</a></li>
+          <li><a class="dropdown-item text-white" href="#">USD $</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent border-top border-warning">
     <div class="container">
       <!-- Logo -->
-      <a class="navbar-brand fw-bold text-warning" href="#">AdLaYr</a>
+      <a class="navbar-brand fw-bold text-warning fs-3" href="#">AdLaYr</a>
 
       <!-- Toggler -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Nav Links -->
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active text-warning" href="#">Home</a>
-          </li>
+      <!-- Menu -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active text-warning" href="#">Home</a></li>
+
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown">
-              Pages
-            </a>
-            <ul class="dropdown-menu bg-black bg-opacity-75 border-warning rounded-3">
-              <li><a class="dropdown-item text-white" href="#">Who We Are</a></li>
-              <li><a class="dropdown-item text-white" href="#">Our Pricing</a></li>
-              <li><a class="dropdown-item text-white" href="#">Login Page</a></li>
-              <li><a class="dropdown-item text-white" href="#">Privacy Policy</a></li>
+            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu bg-black border-warning">
+              <li><a class="dropdown-item text-white" href="#">About</a></li>
+              <li><a class="dropdown-item text-white" href="#">Our Team</a></li>
+              <li><a class="dropdown-item text-white" href="#">Privacy</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">Shop</a>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu bg-black border-warning">
+              <li><a class="dropdown-item text-white" href="#">Articles</a></li>
+              <li><a class="dropdown-item text-white" href="#">Recipes</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">Contact</a>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Shop</a>
+            <ul class="dropdown-menu bg-black border-warning">
+              <li><a class="dropdown-item text-white" href="#">Products</a></li>
+              <li><a class="dropdown-item text-white" href="#">Offers</a></li>
+            </ul>
           </li>
+
+          <li class="nav-item"><a class="nav-link text-white" href="#">Contact</a></li>
         </ul>
+      </div>
+
+      <!-- Right Icons -->
+      <div class="d-flex align-items-center gap-3 text-white">
+        <a href="#" class="text-white"><i class="bi bi-person"></i></a>
+        <a href="#" class="text-white"><i class="bi bi-bag"></i></a>
       </div>
     </div>
   </nav>
 </header>
-
-{% endblock %}

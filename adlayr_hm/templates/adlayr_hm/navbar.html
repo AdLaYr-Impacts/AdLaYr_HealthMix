@@ -1,0 +1,50 @@
+{% extends 'base.html'  %}
+
+{% block main %}
+
+<!-- ===== NAVBAR SECTION ===== -->
+<header class="navbar-dark bg-black sticky-top">
+  <div class="container-fluid py-2 text-center text-white border-bottom border-warning">
+    <span>✨ Book & Get Free Sample Today!</span>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black bg-opacity-75 backdrop-blur">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand fw-bold text-warning" href="#">AdLaYr</a>
+
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Nav Links -->
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-warning" href="#">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown">
+              Pages
+            </a>
+            <ul class="dropdown-menu bg-black bg-opacity-75 border-warning rounded-3">
+              <li><a class="dropdown-item text-white" href="#">Who We Are</a></li>
+              <li><a class="dropdown-item text-white" href="#">Our Pricing</a></li>
+              <li><a class="dropdown-item text-white" href="#">Login Page</a></li>
+              <li><a class="dropdown-item text-white" href="#">Privacy Policy</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+{% endblock %}

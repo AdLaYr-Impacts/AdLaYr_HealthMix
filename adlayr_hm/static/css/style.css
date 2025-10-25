@@ -1,3 +1,12 @@
+/* Navbar */
+.backdrop-blur {
+  backdrop-filter: blur(10px);
+}
+.dropdown-menu .dropdown-item:hover {
+  background-color: rgba(255, 215, 0, 0.2);
+}
+
+/* banner */
 .banner {
   position: relative;
   overflow: hidden;

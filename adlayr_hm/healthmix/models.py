@@ -131,3 +131,11 @@ class FAQQuestions(BaseModel):
 class FAQAnswers(BaseModel):
     question = models.ForeignKey(FAQQuestions, on_delete=models.CASCADE)
     answer = models.TextField()
+
+# model to keep announcement or sales message
+class AnnouncementMessage(BaseModel):
+    message = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.message
+    

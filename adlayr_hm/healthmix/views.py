@@ -14,3 +14,10 @@ class HomeView(View):
             "announcement_message": announcement_message,
         }
         return render(request, 'adlayr_hm/home.html', context=data)
+
+class SignUpViewset(View):
+    def get(self,request,*args,**kwargs):
+        data = {
+            
+        }
+        return render(request, 'adlayr_hm/signup.html', context=data)

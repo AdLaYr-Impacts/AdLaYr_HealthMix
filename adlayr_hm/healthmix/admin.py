@@ -12,9 +12,16 @@ from .models import(
     UserAddress,
     FAQQuestions,
     FAQAnswers,
+    AnnouncementMessage,
 )
 
-admin.site.register(BannerImage)
+class BannerImageAdmin(admin.ModelAdmin):
+    list_display = ["name", "is_active", "created_at"]
+
+class AnnouncementMessageAdmin(admin.ModelAdmin):
+    list_display = ["message", "is_active"]
+
+admin.site.register(BannerImage, BannerImageAdmin)
 admin.site.register(Product)
 admin.site.register(ProductVariationCategorey)
 admin.site.register(ProductVariation)
@@ -25,3 +32,4 @@ admin.site.register(RatingAndReview)
 admin.site.register(UserAddress)
 admin.site.register(FAQQuestions)
 admin.site.register(FAQAnswers)
+admin.site.register(AnnouncementMessage, AnnouncementMessageAdmin)

@@ -17,7 +17,8 @@ class HomeView(View):
 
 class SignUpViewset(View):
     def get(self,request,*args,**kwargs):
+        banner_image = BannerImage.objects.filter(is_active=True).first()
         data = {
-            
+            "banner_image": banner_image.image.url,
         }
         return render(request, 'adlayr_hm/signup.html', context=data)

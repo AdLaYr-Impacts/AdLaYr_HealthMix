@@ -96,6 +96,7 @@
   height: 100vh;
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
+  backdrop-filter: blur(5px);
 }
 
 /* Frosted glass effect */
@@ -150,6 +151,45 @@
   align-items: center;
   background: radial-gradient(circle at top left, rgba(255,215,0,0.1), rgba(0,0,0,0.85));
 }
+
+.form-control {
+  background: rgba(255, 255, 255, 0.1) !important; /* semi-transparent base */
+  color: #fff;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.form-control::placeholder {
+  color: #ccc;
+}
+
+.form-control:focus {
+  background: rgba(0, 0, 0, 0.4); /* darker translucent bg instead of white */
+  border: 1.5px solid #000;        /* black border */
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.7); /* golden glow */
+  color: #fff;
+  outline: none;
+}
+
+.breadcrumb {
+  background: transparent;
+  font-size: 0.9rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  color: #ffcc00 !important; /* gold divider */
+}
+
+.breadcrumb-item a {
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+  color: #fff !important;
+  text-shadow: 0 0 6px #ffcc00;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {

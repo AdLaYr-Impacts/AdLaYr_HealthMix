@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>AdLaYr HealthMix | Login</title>
+{% endblock %}
+
+{% block main %}
+
+<body class="register-body" 
+      style="background: url('{{ banner_image }}') center/cover no-repeat;">
+
+  <div class="register-container d-flex justify-content-center align-items-center">
+    <div class="glass-card p-5 text-center">
+
+      <h5 class="mb-0 text-gold fw-bold">AdLaYr's</h5>
+      <h1 class="mb-4 text-gold fw-bold">HealthMix</h1>
+
+      <p class="text-white-50 mb-4">Login to continue your healthy journey</p>
+
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <input type="text" class="form-control input-glow" placeholder="user Name" required>
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control input-glow" placeholder="Password" required>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rememberMe">
+            <label class="form-check-label text-white-50" for="rememberMe">Remember me</label>
+          </div>
+          <a href="#" class="text-gold text-decoration-none">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-gold w-100 fw-bold">Login</button>
+      </form>
+
+      <div class="mt-4">
+        <p class="text-white-50">Don't have an account?</p>
+        <a href="{% url 'signup' %}" class="text-gold fw-semibold">Create Account</a>
+      </div>
+
+      <!-- Breadcrumb Navigation -->
+      <nav class="mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center mb-0">
+          <li class="breadcrumb-item">
+            <a href="{% url 'home' %}" class="text-gold text-decoration-none">Home</a>
+          </li>
+          <li class="breadcrumb-item active text-white-50" aria-current="page">Login</li>
+        </ol>
+      </nav>
+
+    </div>
+  </div>
+
+</body>
+
+{% endblock %}

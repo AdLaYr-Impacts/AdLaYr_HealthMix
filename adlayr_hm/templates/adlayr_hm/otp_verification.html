@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>AdLaYr HealthMix | OTP Authentication</title>
+{% endblock %}
+
+{% block main %}
+
+<body class="register-body" 
+      style="background: url('{{ banner_image }}') center/cover no-repeat;">
+
+  <div class="register-container d-flex justify-content-center align-items-center">
+    <div class="glass-card p-5 text-center">
+
+      <h5 class="mb-0 text-gold fw-bold">AdLaYr's</h5>
+      <h1 class="mb-4 text-gold fw-bold">HealthMix</h1>
+
+      <p class="text-white-50 mb-4">Enter the 6-digit OTP sent to your registered Email</p>
+
+      <form>
+        <div class="d-flex justify-content-center mb-4 otp-inputs">
+          <input type="text" maxlength="1" class="otp-box form-control text-center mx-1" required>
+          <input type="text" maxlength="1" class="otp-box form-control text-center mx-1" required>
+          <input type="text" maxlength="1" class="otp-box form-control text-center mx-1" required>
+          <input type="text" maxlength="1" class="otp-box form-control text-center mx-1" required>
+          <input type="text" maxlength="1" class="otp-box form-control text-center mx-1" required>
+          <input type="text" maxlength="1" class="otp-box form-control text-center mx-1" required>
+        </div>
+
+        <button type="submit" class="btn btn-gold w-100 fw-bold">Verify OTP</button>
+      </form>
+
+      <div class="mt-3">
+        <p class="text-white-50 mb-1">Didn't receive OTP?</p>
+        <a href="#" class="text-gold fw-semibold resend-link">Resend OTP</a>
+      </div>
+
+      <!-- Breadcrumb Navigation -->
+      <nav class="mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center mb-0">
+          <li class="breadcrumb-item">
+            <a href="{% url 'home' %}" class="text-gold text-decoration-none">Home</a>
+          </li>
+          <li class="breadcrumb-item active text-white-50" aria-current="page">OTP Verification</li>
+        </ol>
+      </nav>
+
+    </div>
+  </div>
+
+</body>
+
+{% endblock %}

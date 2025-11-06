@@ -90,3 +90,148 @@
   position: relative;
   z-index: 2;
 }
+
+/* signup (or) registeration page */
+.register-body {
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  backdrop-filter: blur(5px);
+}
+
+/* Frosted glass effect */
+.glass-card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 25px rgba(128, 113, 30, 0.517);
+  width: 100%;
+  max-width: 380px;
+  color: white;
+}
+
+.text-gold {
+  color: #ffcc00;
+}
+
+.btn-gold {
+  background: linear-gradient(90deg, #ffcc00, #ffaa00);
+  border: none;
+  color: black;
+  transition: 0.3s;
+}
+.btn-gold:hover {
+  background: linear-gradient(90deg, #ffd633, #ffb700);
+  transform: scale(1.05);
+}
+
+.form-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ffcc00;
+}
+
+.register-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: radial-gradient(circle at top left, rgba(255,215,0,0.1), rgba(0,0,0,0.85)); */
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.1) !important; /* semi-transparent base */
+  color: #fff;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.form-control::placeholder {
+  color: #ccc;
+}
+
+.form-control:focus {
+  background: rgba(0, 0, 0, 0.4); /* darker translucent bg instead of white */
+  border: 1.5px solid #000;        /* black border */
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.7); /* golden glow */
+  color: #fff;
+  outline: none;
+}
+
+.breadcrumb {
+  background: transparent;
+  font-size: 0.9rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  color: #ffcc00 !important; /* gold divider */
+}
+
+.breadcrumb-item a {
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+  color: #fff !important;
+  text-shadow: 0 0 6px #ffcc00;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .glass-card {
+    margin: 20px;
+    padding: 2rem;
+  }
+}
+
+/* OTP verification page */
+/* OTP Boxes */
+.otp-box {
+  width: 45px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  color: white;
+  font-size: 1.3rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.otp-box:focus {
+  border-color: black;
+  box-shadow: 0 0 10px #ffcc00;
+  background: rgba(255, 255, 255, 0.05);
+  outline: none;
+}
+
+/* Resend OTP hover */
+.resend-link {
+  transition: color 0.3s ease;
+}
+.resend-link:hover {
+  color: #fff;
+  text-shadow: 0 0 6px #ffcc00;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .otp-box {
+    width: 40px;
+    height: 45px;
+  }
+}

@@ -1,0 +1,59 @@
+{% extends 'base.html'  %}
+
+{% block title %}
+<title>AdLaYr HealthMix | Register</title>
+{% endblock %}
+
+{% block main %}
+
+<body class="register-body"
+    style="background: url('{{ banner_image }}') no-repeat center center/cover; background-attachment: fixed;">
+
+   <div class="register-container d-flex justify-content-center align-items-center">
+    <div class="glass-card p-5 text-center">
+      <h5 class="mb-0 text-gold fw-bold">AdLaYr's</h5>
+      <h1 class="mb-4 text-gold fw-bold">HealthMix</h1>
+      
+      <form>
+        <div class="mb-3">
+          <input type="text" class="form-control form-input" placeholder="Enter your name" required>
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control form-input" placeholder="example@gmail.com" required>
+        </div>
+        <div class="mb-3 position-relative">
+          <input type="password" id="password" class="form-control form-input" placeholder="Enter password" required>
+          <span class="toggle-password" onclick="togglePassword()">🙈</span>
+        </div>
+        <div class="mb-3 position-relative">
+          <input type="password" id="password" class="form-control form-input" placeholder="Confirm password" required>
+          <span class="toggle-password" onclick="togglePassword()">🙈</span>
+        </div>
+        <div class="form-check mb-3 text-start">
+          <input class="form-check-input" type="checkbox" id="terms" required>
+          <label class="form-check-label small text-white-50" for="terms">
+            I agree to the <a href="#" class="text-gold">terms & conditions</a>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-gold w-100 fw-bold">Register</button>
+      </form>
+
+      <p class="mt-3 text-white-50">
+        Already have an account?
+        <a href="{% url 'login' %}" class="text-gold fw-semibold">Login</a>
+      </p>
+      <!-- Breadcrumb navigation (bottom of the signup card) -->
+      <nav class="mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center mb-0">
+          <li class="breadcrumb-item">
+            <a href="{% url 'home' %}" class="text-gold text-decoration-none">Home</a>
+          </li>
+          <li class="breadcrumb-item active text-white-50" aria-current="page">Sign Up</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+</body>
+
+{% endblock %}

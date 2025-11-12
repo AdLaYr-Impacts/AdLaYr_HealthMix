@@ -1,4 +1,4 @@
-{% extends 'base.html'  %}
+{% extends 'base.html' %}
 
 {% block title %}
 <title>AdLaYr HealthMix | Register</title>
@@ -14,29 +14,40 @@
       <h5 class="mb-0 text-gold fw-bold">AdLaYr's</h5>
       <h1 class="mb-4 text-gold fw-bold">HealthMix</h1>
       
-      <form>
+      <form method="POST">
+        {% csrf_token %}
         <div class="mb-3">
-          <input type="text" class="form-control form-input" placeholder="Enter your name" required>
+          {{ form.username }}
         </div>
         <div class="mb-3">
-          <input type="email" class="form-control form-input" placeholder="example@gmail.com" required>
+          {{ form.email }}
         </div>
         <div class="mb-3 position-relative">
-          <input type="password" id="password" class="form-control form-input" placeholder="Enter password" required>
+          {{ form.password }}
           <span class="toggle-password" onclick="togglePassword()">🙈</span>
         </div>
         <div class="mb-3 position-relative">
-          <input type="password" id="password" class="form-control form-input" placeholder="Confirm password" required>
-          <span class="toggle-password" onclick="togglePassword()">🙈</span>
+          {{ form.confirm_password }}
+          <span class="toggle-password toggle-confirm-password" onclick="toggleconfirmPassword()">🙈</span>
         </div>
         <div class="form-check mb-3 text-start">
           <input class="form-check-input" type="checkbox" id="terms" required>
-          <label class="form-check-label small text-white-50" for="terms">
+          <label class="form-check-label small text-white-50" for="terms">  
             I agree to the <a href="#" class="text-gold">terms & conditions</a>
           </label>
         </div>
         <button type="submit" class="btn btn-gold w-100 fw-bold">Register</button>
       </form>
+
+      {% if form.errors %}
+        <div id="password-error" class="password-error text-danger">
+          {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+              <p>⚠️ {{ error }}</p>
+            {% endfor %}
+          {% endfor %}
+        </div>
+      {% endif %}
 
       <p class="mt-3 text-white-50">
         Already have an account?

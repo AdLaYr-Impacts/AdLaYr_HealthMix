@@ -116,6 +116,40 @@
   backdrop-filter: blur(5px);
 }
 
+.password-error {
+  background: rgba(255, 192, 203, 0.15); /* light honey pink tone */
+  color: #ff6f61; /* soft coral red */
+  border: 1px solid rgba(255, 111, 97, 0.4);
+  padding: 10px 18px;
+  border-radius: 15px;
+  font-weight: 500;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 15px;
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.2);
+  backdrop-filter: blur(6px);
+  animation: shake 0.4s ease-in-out, fadeIn 0.4s ease;
+  transition: all 0.3s ease;
+}
+
+/* cute shake animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+}
+
+/* subtle fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.password-error span::before {
+  content: "🍯 ";
+}
+
 /* Frosted glass effect */
 .glass-card {
   background: rgba(0, 0, 0, 0.3);

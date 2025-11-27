@@ -3,6 +3,18 @@ function togglePassword() {
   const passwordField = document.getElementById("password");
   passwordField.type = passwordField.type === "password" ? "text" : "password";
   const icon = document.querySelector('.toggle-password');
+  console.log(icon)
+  if (icon.textContent.trim() === '🙈') {
+    icon.textContent = '🐵';
+  } else {
+    icon.textContent = '🙈';
+  }
+}
+
+function toggleconfirmPassword() {
+  const passwordField = document.getElementById("confirm_password");
+  passwordField.type = passwordField.type === "password" ? "text" : "password";
+  const icon = document.querySelector('.toggle-confirm-password');
   if (icon.textContent.trim() === '🙈') {
     icon.textContent = '🐵';
   } else {

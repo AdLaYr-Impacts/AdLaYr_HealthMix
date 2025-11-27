@@ -51,3 +51,19 @@ class RegisterForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+    
+
+class LoginForm(forms.Form):
+
+    username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={
+        'class': 'form-control input-glow',
+        'placeholder': "User Name",
+        'required': 'required'
+    }))
+
+    password = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
+        'id': 'password',
+        'class': 'form-control input-glow',
+        'placeholder': "password",
+        'required': 'required'
+    }))

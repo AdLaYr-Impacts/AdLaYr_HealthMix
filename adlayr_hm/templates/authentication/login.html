@@ -20,10 +20,10 @@
       <form method="POST">
         {% csrf_token %}
         <div class="mb-3">
-          <input type="text" class="form-control input-glow" placeholder="user Name" required>
+          {{form.username}}
         </div>
         <div class="mb-3 position-relative">
-          <input type="password" id="password" class="form-control input-glow" placeholder="Password" required>
+          {{form.password}}
           <span class="toggle-password" onclick="togglePassword()">🙈</span>
         </div>
 
@@ -37,6 +37,12 @@
 
         <button type="submit" class="btn btn-gold w-100 fw-bold">Login</button>
       </form>
+
+      {% if msg %}
+        <div id="password-error" class="password-error text-danger">
+          <p>😥 {{ msg }}</p>
+        </div>
+      {% endif %}
 
       <div class="mt-4">
         <p class="text-white-50">Don't have an account?</p>

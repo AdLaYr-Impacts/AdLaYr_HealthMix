@@ -8,6 +8,7 @@ from .forms import (
     RegisterForm,
     LoginForm
 )
+from common.helper import send_email
 
 class SignUpViewset(View):
     form_class = RegisterForm
@@ -25,6 +26,15 @@ class SignUpViewset(View):
         if form.is_valid():
             user = form.save(commit=False)
             user.role = 'User'
+
+            # otp verification
+            template = "email/otp_verification_mail.html"
+            context = {
+                'subject': f"{user.username}, Verify and Create Your New Account - OTP Inside 🐣🐥",
+                'to_email': user.email,
+            }
+            send_email(template, context)
+
             user.save()
             return redirect('login')
         banner_image = BannerImage.objects.filter(is_active=True).first()
@@ -59,10 +69,6 @@ class LoginViewset(View):
         if form.is_valid():
             user = authenticate(**form.cleaned_data)
 
-            print(form.changed_data)
-
-            print(user)
-
             if user:
                 login(request, user)
                 return redirect('home')
@@ -78,4 +84,5 @@ class LoginViewset(View):
 
 class LogoutViewset(View):
     def get(self,request,*args,**kwargs):
-        pass
+        logout(request)
+        return redirect('home')

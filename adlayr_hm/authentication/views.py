@@ -8,7 +8,7 @@ from .forms import (
     RegisterForm,
     LoginForm
 )
-from common.helper import send_email
+from common.helper import send_email, generate_otp
 
 class SignUpViewset(View):
     form_class = RegisterForm
@@ -27,11 +27,15 @@ class SignUpViewset(View):
             user = form.save(commit=False)
             user.role = 'User'
 
+            # generate and store otp
+            otp = generate_otp(user.email)
+
             # otp verification
             template = "email/otp_verification_mail.html"
             context = {
                 'subject': f"{user.username}, Verify and Create Your New Account - OTP Inside 🐣🐥",
                 'to_email': user.email,
+                'OTP': otp,
             }
             send_email(template, context)
 

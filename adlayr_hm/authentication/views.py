@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.hashers import check_password
+from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
 from django.views import View
 from healthmix.models import (
     BannerImage,
 )
+from .models import OTP, Profile
 from .forms import (
     RegisterForm,
     LoginForm
@@ -40,7 +43,10 @@ class SignUpViewset(View):
             send_email(template, context)
 
             user.save()
-            return redirect('login')
+
+            request.session["email"] = user.email
+            request.session["user_id"] = user.id
+            return redirect('otp_verification')
         banner_image = BannerImage.objects.filter(is_active=True).first()
         data = {
             "banner_image": banner_image.image.url,
@@ -55,6 +61,49 @@ class OtpVerificationViewset(View):
             "banner_image": banner_image.image.url,
         }
         return render(request, 'authentication/otp_verification.html', context=data)
+    
+    def post(self,request,*args,**kwargs):
+        user_email = request.session.get("email")
+        user_id = request.session.get("user_id")
+        otp = request.POST.get("otp", None)
+
+        otp_obj = OTP.objects.filter(email = user_email).order_by('-created_at').first()
+        if check_password(otp, otp_obj.otp_hash) and otp_obj.expires_at > timezone.now():
+            otp_obj.attempts += 1
+            otp_obj.is_verified = True
+            otp_obj.save()
+            user = Profile.objects.get(id=user_id)
+            user.is_email_verified = True
+            user.save()
+            return redirect('login')
+        elif otp_obj.expires_at <= timezone.now():
+            banner_image = BannerImage.objects.filter(is_active=True).first()
+            msg = f"OTP expired for email:{user_email}"
+            data = {
+                "banner_image": banner_image.image.url,
+                'msg': msg if msg else None
+            }
+            otp_obj.delete()
+        else:
+            if otp_obj.attempts == 3:
+                msg = "Maximum number attempt is reached"
+            otp_obj.attempts += 1
+            otp_obj.save()
+            banner_image = BannerImage.objects.filter(is_active=True).first()
+            msg = "Entered wrong OTP, Please correct it"
+            data = {
+                "banner_image": banner_image.image.url,
+                'msg': msg if msg else None
+            }
+
+        return render(request, 'authentication/otp_verification.html', context=data)
+
+
+    # ⭐ OPTIONAL IMPROVEMENTS
+    # ✔️ Auto-submit when 6 digits filled
+    # ✔️ Paste support (Ctrl + V)
+    # ✔️ Countdown timer
+    # ✔️ Disable inputs after submit
 
 
 class LoginViewset(View):

@@ -24,14 +24,28 @@ function toggleconfirmPassword() {
 
 
 // OTP verification
-document.querySelectorAll('.otp-box').forEach((box, index, boxes) => {
-  box.addEventListener('input', () => {
-    if (box.value.length === 1 && index < boxes.length - 1) {
-      boxes[index + 1].focus();
+const otpBoxes = document.querySelectorAll(".otp-box");
+const otpHidden = document.getElementById("otp");
+const otpForm = document.querySelector("form");
+
+otpBoxes.forEach((box, index) => {
+  box.addEventListener("input", () => {
+    box.value = box.value.replace(/[^0-9]/g, "");
+    if (box.value && index < otpBoxes.length - 1) {
+      otpBoxes[index + 1].focus();
+    }
+  });
+  box.addEventListener("keydown", (e) => {
+    if (e.key === "Backspace" && !box.value && index > 0) {
+      otpBoxes[index - 1].focus();
     }
   });
 });
-
+otpForm.addEventListener("submit", () => {
+  otpHidden.value = Array.from(otpBoxes)
+    .map(input => input.value)
+    .join("");
+});
 
 // Login Page
 document.addEventListener("DOMContentLoaded", () => {

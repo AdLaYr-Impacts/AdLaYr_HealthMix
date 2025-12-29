@@ -27,7 +27,7 @@ class Profile(AbstractUser):
         return f'{self.username}'
     
 class OTP(BaseModel):
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     otp_hash = models.CharField(max_length=128)
     expires_at = models.DateTimeField()
     attempts = models.IntegerField(default=0)

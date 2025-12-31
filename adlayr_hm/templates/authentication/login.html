@@ -9,6 +9,21 @@
 <body class="register-body" 
       style="background: url('{{ banner_image }}') center/cover no-repeat;">
 
+  {% if messages %}
+    {% for message in messages %}
+      <div class="toast-container">
+        <div class="custom-toast success">
+          <span class="toast-icon">✅</span>
+          <span class="toast-message">
+            Authenticated Successfully 🎉<br>
+            Please Login 🔐
+          </span>
+          <span class="toast-close" onclick="this.parentElement.remove()">✖</span>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+
   <div class="register-container d-flex justify-content-center align-items-center">
     <div class="glass-card p-5 text-center">
 

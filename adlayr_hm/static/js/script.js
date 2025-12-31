@@ -58,3 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
     card.style.transform = "translateY(0)";
   }, 200);
 });
+
+// Sign Up + OTP Verification Success Message
+setTimeout(() => {
+  document.querySelectorAll('.custom-toast').forEach(toast => {
+    toast.remove();
+  });
+}, 4000);

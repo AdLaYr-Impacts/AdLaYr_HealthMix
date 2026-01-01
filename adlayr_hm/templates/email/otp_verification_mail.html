@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AdLaYr HealthMix OTP Verification</title>
+
+<style>
+  body {
+    background: #000000;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", Arial, sans-serif;
+    color: #ffffff;
+  }
+
+  .container {
+    width: 100%;
+    padding: 20px 0;
+  }
+
+  .email-wrapper {
+    max-width: 480px;
+    margin: auto;
+    background: #0d0d0d;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);
+    overflow: hidden;
+    border: 1px solid rgba(255, 215, 0, 0.35);
+  }
+
+  .header-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  h1 {
+    text-align: center;
+    color: #ffd700;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 25px 0 10px;
+    letter-spacing: 1px;
+  }
+
+h3 {
+    text-align: center;
+    color: #f0d642ff;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 15px 0 10px;
+    letter-spacing: 1px;
+  }
+
+  p {
+    text-align: center;
+    color: #f5f5f5;
+    font-size: 15px;
+    margin: 0 25px 20px;
+    line-height: 1.6;
+  }
+
+.details-box {
+    margin: 30px 20px;
+    padding: 18px;
+    background: rgba(255, 215, 0, 0.07);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 12px;
+    line-height: 1.7;
+    color: #dcdcdc;
+    font-size: 14px;
+  }
+
+  .otp-box {
+    background: #111111;
+    border: 1px solid #ffd700;
+    width: 60%;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 26px;
+    letter-spacing: 6px;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: #bdbdbd;
+    font-size: 12px;
+  }
+
+  .footer a {
+    color: #ffd700;
+    text-decoration: none;
+  }
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="email-wrapper">
+
+      <!-- Title -->
+      <h1>🐝AdLaYr's HealthMix🐝</h1>
+      <h3>Verify Your Email</h3>
+
+      <p>To create your <b>AdLaYr's HealthMix</b> account, please use the OTP given below.  
+      This code is valid only for the next <b>5 minutes 🍯</b>.</p>
+
+      <!-- OTP BOX -->
+      <div class="otp-box">{{ OTP }}</div>
+
+      <!-- Details -->
+      <div class="details-box">
+        🔐 <b>Why this email?</b><br>
+        You're trying to register or sign in to your AdLaYr HealthMix account.<br><br>
+
+        ⏳ <b>OTP Validity:</b> 5 minutes<br>
+        🚫 <b>Do not share</b> this OTP with anyone — even if they claim to be from AdLaYr.<br>
+        🛡️ This ensures the highest security for your account.
+      </div>
+
+      <p>If you didn't request this, please ignore this email.🙂🩷</p>
+
+      <!-- Footer -->
+      <div class="footer">
+        © 2025 AdLaYr HealthMix. All Rights Reserved.<br>
+        Need help? <a href="#">Contact Support</a>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from healthmix.models import BaseModel
 
 class RoleChoices(models.TextChoices):
 
@@ -23,4 +24,14 @@ class Profile(AbstractUser):
 
     def __str__(self):
 
-        return f'{self.username}' 
+        return f'{self.username}'
+    
+class OTP(BaseModel):
+    email = models.EmailField()
+    otp_hash = models.CharField(max_length=128)
+    expires_at = models.DateTimeField()
+    attempts = models.IntegerField(default=0)
+    is_verified = models.BooleanField(default=False)
+
+    def __str__(self):
+        return super().__str__()

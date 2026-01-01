@@ -139,14 +139,15 @@ class OtpVerificationViewset(View):
 class LoginViewset(View):
     form_class = LoginForm
     def get(self,request,*args,**kwargs):
-        is_signup = request.session.get("sign_up", None)
+        is_signup = request.session.get("sign_up", False)
+        msg = False
         if is_signup:
             msg = 'Authenticated Successfully, Please Login'
         banner_image = BannerImage.objects.filter(is_active=True).first()
         form = self.form_class()
         data = {
             "banner_image": banner_image.image.url,
-            'messages': msg if 'msg' in locals() else None,
+            'messages': msg,
             'form': form
         }
         return render(request, 'authentication/login.html', context=data)

@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://adlayrhealthmix.pythonanywhere.com']
+ALLOWED_HOSTS = ['adlayrhealthmix.pythonanywhere.com']
 
 
 # Application definition
@@ -112,7 +112,7 @@ DATABASES = {
         'NAME': config('db_NAME'),
         'USER': config('db_USER'),
         'PASSWORD': config('db_PASSWORD'),
-        'HOST': 'localhost',
+        'HOST': config('db_host'),
         'PORT': '3306',
     }
 }

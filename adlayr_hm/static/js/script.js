@@ -65,3 +65,27 @@ setTimeout(() => {
     toast.remove();
   });
 }, 4000);
+
+
+// ********************** //
+// Product Details //
+// ********************* //
+
+function changeImage(el) {
+  document.getElementById("mainImage").src = el.src;
+
+  document.querySelectorAll(".thumb").forEach(t => {
+    t.classList.remove("active");
+  });
+
+  el.classList.add("active");
+}
+
+function updateQty(value) {
+  let qty = document.getElementById("qty");
+  let current = parseInt(qty.value);
+
+  if (current + value >= 1) {
+    qty.value = current + value;
+  }
+}

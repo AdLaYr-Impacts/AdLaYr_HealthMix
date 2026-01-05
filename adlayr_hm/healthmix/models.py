@@ -65,6 +65,7 @@ class ProductImage(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="products/")
     alt_text = models.CharField(max_length=255, null=True, blank=True)
+    sort_order = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.product.name} image"

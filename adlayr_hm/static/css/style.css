@@ -351,16 +351,19 @@
 /* ---------------------- */
 
 /* THEME */
-.dark-theme {
-  background: radial-gradient(circle at top, #1c1c1c, #0f0f0f);
-  min-height: 100vh;
-  font-family: 'Poppins', sans-serif;
+#pd-container{
+  height: 110vh;
+}
+
+#pd-row{
+  padding-top: 170px;
 }
 
 /* PRODUCT IMAGE */
 .product-main-img {
-  max-width: 420px;
-  border-radius: 50%;
+  width: 420px;
+  height: 480px;
+  border-radius: 5%;
   transition: transform 0.4s ease;
 }
 

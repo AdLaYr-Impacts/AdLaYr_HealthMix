@@ -19,9 +19,8 @@ class HomeView(View):
     
 
 class ProductDetailsView(View):
-    def get(self,request,*args,**kwargs):
-        product_slug = request.kwargs.get("slug")
-        product = Product.objects.filter(slug = product_slug)
+    def get(self,request,slug,*args,**kwargs):
+        product = Product.objects.filter(slug_field = slug).first()
         product_images = ProductImage.objects.filter(product = product).order_by("sort_order")
         data = {
             'product': product,

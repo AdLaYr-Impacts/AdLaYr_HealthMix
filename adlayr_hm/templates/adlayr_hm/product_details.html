@@ -7,62 +7,60 @@
 {% block main %}
 
   {% include "adlayr_hm/navbar.html" %}
+  <div class="container-fluid bg-black" id="pd-container">
+    <div class="container">
+      <div class="row align-items-center g-5" id="pd-row">
 
-  <div class="container py-5">
-    <div class="row align-items-center g-5">
+        <!-- Product Image Section -->
+        <div class="col-lg-6 text-center">
+          <img id="mainImage" src="{{ product_images.0.image.url }}" class="img-fluid product-main-img">
 
-      <!-- Product Image Section -->
-      <div class="col-lg-6 text-center">
-        <img id="mainImage" src="images/pizza-main.png" class="img-fluid product-main-img">
-
-        <!-- Thumbnails -->
-        <div class="d-flex justify-content-center gap-3 mt-4">
-          <img src="images/pizza-main.png" class="thumb active" onclick="changeImage(this)">
-          <img src="images/pizza-1.png" class="thumb" onclick="changeImage(this)">
-          <img src="images/pizza-2.png" class="thumb" onclick="changeImage(this)">
-          <img src="images/pizza-3.png" class="thumb" onclick="changeImage(this)">
-        </div>
-      </div>
-
-      <!-- Product Details -->
-      <div class="col-lg-6 text-white">
-        <h1 class="product-title">Shrimp Pizza</h1>
-
-        <div class="d-flex align-items-center gap-3 mb-3">
-          <span class="price">RS 250.00-</span>
-          <div class="rating">
-            ★★★★☆
-            <span class="review-text">8 Reviews</span>
+          <!-- Thumbnails -->
+          <div class="d-flex justify-content-center gap-3 mt-4">
+            {% for image in product_images %}
+            <img src="{{ image.image.url }}" class="thumb {% if forloop.first %} active {% endif %}" onclick="changeImage(this)">
+            {% endfor %}
           </div>
         </div>
 
-        <p class="product-desc">
-          Delicious shrimp pizza topped with olives, bell peppers, fresh basil,
-          mozzarella cheese and signature sauce baked to perfection.
-        </p>
+        <!-- Product Details -->
+        <div class="col-lg-6 text-white">
+          <h1 class="product-title">{{ product.name }}</h1>
 
-        <p class="meta"><strong>Ingrediants:</strong> Chicken, Launch, Pizza, Burger</p>
-        <p class="meta"><strong>Nutritional Facts:</strong> Healthy, Organic, Chicken, Sauce</p>
-        <p class="meta"><strong>Health Benefits:</strong> Healthy, Organic, Chicken, Sauce</p>
-
-        <!-- Quantity + Cart -->
-        <div class="d-flex align-items-center gap-3 mt-4">
-          <div class="quantity-box">
-            <button onclick="updateQty(-1)">-</button>
-            <input type="text" id="qty" value="1">
-            <button onclick="updateQty(1)">+</button>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <span class="price">₹ {{ product.price }}</span>
+            <div class="rating">
+              ★★★★☆
+              <span class="review-text">8 Reviews</span>
+            </div>
           </div>
 
-          <button class="btn btn-gold">
-            <i class="bi bi-cart-fill"></i> ADD TO CART
-          </button>
+          <p class="product-desc">
+            {{ product.description }}
+          </p>
 
-          <button class="wishlist-btn">
-            <i class="bi bi-heart"></i>
-          </button>
+          <p class="meta"><strong>Ingrediants:</strong> {{ product.ingredients }}</p>
+          <p class="meta"><strong>Health Benefits:</strong> {{ product.benefits }}</p>
+
+          <!-- Quantity + Cart -->
+          <div class="d-flex align-items-center gap-3 mt-4">
+            <div class="quantity-box">
+              <button onclick="updateQty(-1)">-</button>
+              <input type="text" id="qty" value="1">
+              <button onclick="updateQty(1)">+</button>
+            </div>
+
+            <button class="btn btn-gold">
+              <i class="bi bi-cart-fill"></i> ADD TO CART
+            </button>
+
+            <button class="wishlist-btn">
+              <i class="bi bi-heart"></i>
+            </button>
+          </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 

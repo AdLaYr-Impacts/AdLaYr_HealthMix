@@ -350,28 +350,51 @@
 /* Product Details Page */
 /* ---------------------- */
 
-/* THEME */
 #pd-container{
   height: 110vh;
 }
 
 #pd-row{
   padding-top: 170px;
+  animation: fadeUp 0.9s ease forwards;
 }
 
-/* PRODUCT IMAGE */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .product-main-img {
   width: 420px;
   height: 480px;
   border-radius: 5%;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.product-main-img:hover {
+  transform: scale(1.05) rotate(-0.5deg);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
 }
 
 .product-main-img:hover {
   transform: scale(1.05);
 }
 
-/* THUMBNAILS */
+.fade-img {
+  opacity: 1;
+  transition: opacity 0.35s ease, transform 0.4s ease;
+}
+
+.fade-img.hide {
+  opacity: 0;
+}
+
 .thumb {
   width: 70px;
   height: 70px;
@@ -379,16 +402,20 @@
   cursor: pointer;
   opacity: 0.6;
   border: 2px solid transparent;
-  transition: 0.3s;
+  transition: all 0.35s ease;
 }
 
-.thumb:hover,
+.thumb:hover {
+  transform: scale(1.1);
+}
+
 .thumb.active {
   opacity: 1;
   border-color: #f5b301;
+  transform: scale(1.15);
+  box-shadow: 0 0 18px rgba(245,179,1,0.6);
 }
 
-/* TEXT */
 .product-title {
   font-size: 3rem;
   font-weight: 700;
@@ -420,7 +447,6 @@
   font-size: 0.95rem;
 }
 
-/* QUANTITY */
 .quantity-box {
   display: flex;
   align-items: center;
@@ -445,7 +471,14 @@
   color: white;
 }
 
-/* BUTTONS */
+.quantity-box button {
+  transition: transform 0.15s ease;
+}
+
+.quantity-box button:active {
+  transform: scale(0.85);
+}
+
 .btn-gold {
   background: linear-gradient(135deg, #f5b301, #ffcc33);
   color: #000;
@@ -468,4 +501,11 @@
   border-radius: 50%;
   width: 48px;
   height: 48px;
+  transition: all 0.3s ease;
+}
+
+.wishlist-btn:hover {
+  background: #f5b301;
+  color: #000;
+  transform: scale(1.15);
 }

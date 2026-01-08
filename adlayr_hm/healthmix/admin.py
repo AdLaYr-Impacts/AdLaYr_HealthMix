@@ -13,6 +13,7 @@ from .models import(
     FAQQuestions,
     FAQAnswers,
     AnnouncementMessage,
+    ProductDetailBannerImage,
 )
 
 class BannerImageAdmin(admin.ModelAdmin):
@@ -21,7 +22,11 @@ class BannerImageAdmin(admin.ModelAdmin):
 class AnnouncementMessageAdmin(admin.ModelAdmin):
     list_display = ["message", "is_active"]
 
+class ProductDetailBannerImageAdmin(admin.ModelAdmin):
+    list_display = ["name", "is_active", "created_at"]
+
 admin.site.register(BannerImage, BannerImageAdmin)
+admin.site.register(ProductDetailBannerImage, ProductDetailBannerImageAdmin)
 admin.site.register(Product)
 admin.site.register(ProductVariationCategorey)
 admin.site.register(ProductVariation)

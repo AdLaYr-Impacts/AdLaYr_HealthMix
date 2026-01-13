@@ -72,7 +72,15 @@ setTimeout(() => {
 // ********************* //
 
 function changeImage(el) {
-  document.getElementById("mainImage").src = el.src;
+  const mainImage = document.getElementById("mainImage");
+
+  // Fade out
+  mainImage.classList.add("hide");
+
+  setTimeout(() => {
+    mainImage.src = el.src;
+    mainImage.classList.remove("hide");
+  }, 200);
 
   document.querySelectorAll(".thumb").forEach(t => {
     t.classList.remove("active");

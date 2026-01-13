@@ -13,17 +13,26 @@
 
         <!-- Product Image Section -->
         <div class="col-lg-6 text-center">
-          <img id="mainImage" src="{{ product_images.0.image.url }}" class="img-fluid product-main-img">
+          <img
+            id="mainImage"
+            src="{{ product_images.0.image.url }}"
+            class="img-fluid product-main-img fade-img"
+            loading="lazy"
+          />
 
           <!-- Thumbnails -->
           <div class="d-flex justify-content-center gap-3 mt-4">
             {% for image in product_images %}
-            <img src="{{ image.image.url }}" class="thumb {% if forloop.first %} active {% endif %}" onclick="changeImage(this)">
+              <img
+                src="{{ image.image.url }}"
+                class="thumb {% if forloop.first %} active {% endif %}"
+                loading="lazy"
+                onclick="changeImage(this)"
+              >
             {% endfor %}
           </div>
         </div>
 
-        <!-- Product Details -->
         <div class="col-lg-6 text-white">
           <h1 class="product-title">{{ product.name }}</h1>
 
@@ -42,7 +51,6 @@
           <p class="meta"><strong>Ingrediants:</strong> {{ product.ingredients }}</p>
           <p class="meta"><strong>Health Benefits:</strong> {{ product.benefits }}</p>
 
-          <!-- Quantity + Cart -->
           <div class="d-flex align-items-center gap-3 mt-4">
             <div class="quantity-box">
               <button onclick="updateQty(-1)">-</button>

@@ -7,6 +7,24 @@
 {% block main %}
 
   {% include "adlayr_hm/navbar.html" %}
+
+  <!-- Login Alert -->
+  <div id="loginAlert" class="glass-alert">
+    <div class="glass-bubble">
+      <span class="glass-emoji">🔐✨</span>
+
+      <div class="glass-text">
+        <strong>Please login</strong><br>
+        to add this item to your cart 🛒
+
+        <!-- CTA -->
+        <a href="{% url 'login' %}" class="glass-login-btn">
+          Login now →
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="container-fluid bg-black" id="pd-container">
     <div class="container">
       <div class="row align-items-center g-5" id="pd-row">
@@ -54,13 +72,23 @@
           <div class="d-flex align-items-center gap-3 mt-4">
             <div class="quantity-box">
               <button onclick="updateQty(-1)">-</button>
-              <input type="text" id="qty" value="1">
+              <input type="text" name="quantity" id="qty" value="1" readonly>
               <button onclick="updateQty(1)">+</button>
             </div>
 
-            <button class="btn btn-gold">
-              <i class="bi bi-cart-fill"></i> ADD TO CART
-            </button>
+            <form method="post">
+              {% csrf_token %}
+
+              {% if not request.user.is_authenticated %}
+                <button type="button" class="btn btn-gold" onclick="showLoginAlert()">
+                  <i class="bi bi-cart-fill"></i> ADD TO CART
+                </button>
+              {% else %}
+                <button type="submit" class="btn btn-gold">
+                  <i class="bi bi-cart-fill"></i> ADD TO CART
+                </button>
+              {% endif %} 
+            </form>
 
             <button class="wishlist-btn">
               <i class="bi bi-heart"></i>

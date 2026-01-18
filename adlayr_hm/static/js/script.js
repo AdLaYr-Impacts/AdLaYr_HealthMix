@@ -97,3 +97,55 @@ function updateQty(value) {
     qty.value = current + value;
   }
 }
+
+// cart - x if not login
+function showLoginAlert() {
+  const alertBox = document.getElementById("loginAlert");
+  const bubble = alertBox.querySelector(".glass-bubble");
+
+  alertBox.style.display = "block";
+  bubble.style.animation = "glassSlideIn 0.45s ease forwards";
+
+  setTimeout(() => {
+    bubble.style.animation = "glassFadeOut 0.4s ease forwards";
+  }, 3500);
+
+  setTimeout(() => {
+    alertBox.style.display = "none";
+  }, 4000);
+}
+
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("glass-login-btn")) {
+    document.getElementById("loginAlert").style.display = "none";
+  }
+});
+
+
+// ********************** //
+// Cart Page Configurations //
+// ********************* //
+
+function changeQty(btn, delta) {
+  const qtyEl = btn.parentElement.querySelector('.qty');
+  let qty = parseInt(qtyEl.innerText);
+  qty = Math.max(1, qty + delta);
+  qtyEl.innerText = qty;
+  updateTotals();
+}
+
+function updateTotals() {
+  let subtotal = 0;
+
+  document.querySelectorAll('.cart-item').forEach(item => {
+    const price = parseInt(item.querySelector('.price')?.dataset.price || 280);
+    const qty = parseInt(item.querySelector('.qty').innerText);
+    const total = price * qty;
+
+    item.querySelector('.item-total').innerText = `₹${total}`;
+    subtotal += total;
+  });
+
+  document.getElementById('subtotal').innerText = `₹${subtotal}`;
+  document.getElementById('orderTotal').innerText = `₹${subtotal + 40}`;
+}

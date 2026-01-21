@@ -611,17 +611,21 @@
 /* Cart Page */
 /* ---------------------- */
 
-body {
-  background: #fafafa;
-  font-family: 'Poppins', sans-serif;
-}
 
 .cart-item {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: whitesmoke;
   padding: 18px;
   border-radius: 18px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   margin-bottom: 16px;
+}
+
+.cart-head{
+  color: white;
+  font-weight: bold;
 }
 
 .cart-img {
@@ -659,6 +663,13 @@ body {
   margin-top: 20px;
 }
 
+.coupon-input{
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: whitesmoke;
+}
+
 .coupon-box input {
   flex: 1;
   padding: 12px 18px;
@@ -676,7 +687,10 @@ body {
 }
 
 .cart-summary {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: whitesmoke;
   padding: 28px;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);

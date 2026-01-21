@@ -49,11 +49,10 @@ class ProductDetailsView(View):
             if product.discounted_price 
             else product.price
         )
-        price(price)
         
         Cart.objects.create(
             user = request.user,
-            Product = product,
+            product = product,
             quantity = quantity,
             price = price
         )
@@ -62,4 +61,12 @@ class ProductDetailsView(View):
 
 class CartView(View):
     def get(self,request,*args,**kwargs):
-        return render(request,'adlayr_hm/cart.html')
+        cart_obj = Cart.objects.filter(user = request.user)
+        product_image = ProductImage.objects.filter(
+            product = cart_obj.first().product
+        ).order_by("sort_order").first()
+        data = {
+            "cart_items": cart_obj,
+            "image": product_image
+        }
+        return render(request,'adlayr_hm/cart.html', context=data)

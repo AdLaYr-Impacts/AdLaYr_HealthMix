@@ -1,5 +1,12 @@
 from django.shortcuts import render, redirect
 from decimal import Decimal
+from django.db.models import (
+    Sum, 
+    F, 
+    Case, 
+    When, 
+    DecimalField
+)
 from django.views import View
 from healthmix.models import (
     BannerImage,
@@ -13,9 +20,14 @@ class HomeView(View):
     def get(self,request,*args,**kwargs):
         banner_image = BannerImage.objects.filter(is_active=True).first()
         announcement_message = AnnouncementMessage.objects.filter(is_active=True).order_by('-created_at').first()
+        if request.user.is_authenticated:
+            cart_item_count = Cart.objects.filter(user = request.user).count()
+        else:
+            cart_item_count = 0
         data = {
             "banner_image": banner_image.image.url,
             "announcement_message": announcement_message,
+            "cart_count": cart_item_count,
         }
         return render(request, 'adlayr_hm/home.html', context=data)
     
@@ -62,11 +74,22 @@ class ProductDetailsView(View):
 class CartView(View):
     def get(self,request,*args,**kwargs):
         cart_obj = Cart.objects.filter(user = request.user)
-        product_image = ProductImage.objects.filter(
-            product = cart_obj.first().product
-        ).order_by("sort_order").first()
+        total_price = cart_obj.aggregate(total = Sum(
+            Case(
+                When(product__discounted_price__isnull=False,
+                    then=F('product__discounted_price')),
+                default=F('product__price'),
+                output_field=DecimalField(max_digits=10, decimal_places=2)
+            )
+        ))['total'] or 0
+        product_image = None
+        if cart_obj.exists():
+            product_image = ProductImage.objects.filter(
+                product = cart_obj.first().product
+            ).order_by("sort_order").first()
         data = {
             "cart_items": cart_obj,
-            "image": product_image
+            "image": product_image,
+            "total_price":total_price,
         }
         return render(request,'adlayr_hm/cart.html', context=data)

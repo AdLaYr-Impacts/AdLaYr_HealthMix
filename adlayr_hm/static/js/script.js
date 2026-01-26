@@ -138,7 +138,7 @@ function updateTotals() {
   let subtotal = 0;
 
   document.querySelectorAll('.cart-item').forEach(item => {
-    const price = parseInt(item.querySelector('.price')?.dataset.price || 280);
+    const price = parseInt(item.querySelector('.price')?.dataset.price);
     const qty = parseInt(item.querySelector('.qty').innerText);
     const total = price * qty;
 
@@ -147,5 +147,5 @@ function updateTotals() {
   });
 
   document.getElementById('subtotal').innerText = `₹${subtotal}`;
-  document.getElementById('orderTotal').innerText = `₹${subtotal + 40}`;
+  document.getElementById('orderTotal').innerText = `₹${subtotal}`;
 }

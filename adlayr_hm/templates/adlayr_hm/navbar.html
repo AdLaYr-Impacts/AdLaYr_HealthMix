@@ -1,3 +1,20 @@
+<!-- Login Alert -->
+<div id="loginAlert" class="glass-alert">
+  <div class="glass-bubble">
+    <span class="glass-emoji">🔐✨</span>
+
+    <div class="glass-text">
+      <strong>Please login</strong><br>
+      to add this item to your cart 🛒
+
+      <!-- CTA -->
+      <a href="{% url 'login' %}" class="glass-login-btn">
+        Login now →
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- ===== NAVBAR SECTION ===== -->
 <header class="main-navbar fixed-top">
   <div class="top-merged-bar text-white pt-3 px-5">
@@ -113,7 +130,18 @@
         </ul>
       </div>
 
-      <a href="{% url 'cart' %}" class="text-white icon-link"><i class="bi bi-bag"></i></a>
+      {% if not request.user.is_authenticated %}
+        <a href="#" class="text-white icon-link cart-icon" onclick="showLoginAlert()">
+          <i class="bi bi-bag"></i>
+        </a>
+      {% else %}
+        <a href="{% url 'cart' %}" class="text-white icon-link cart-icon">
+        <i class="bi bi-bag"></i>
+          {% if cart_count > 0 %}
+            <span class="cart-badge">{{ cart_count }}</span>
+          {% endif %}
+      </a>
+      {% endif %}
     </div>
 
     <!-- Toggler for mobile -->

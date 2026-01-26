@@ -31,11 +31,23 @@
                     <img src="{{ image.image.url }}" class="cart-img">
                     <div>
                     <h6 class="mb-1">{{ item.product.name }}</h6>
-                    <small class="text-muted d-lg-none">₹{{ item.product.discounted_price|floatformat:0 }}</small>
+                    <small class="text-muted d-lg-none">
+                        {% if item.product.discounted_price %}
+                            ₹{{ item.product.discounted_price|floatformat:0 }}
+                        {% else %}
+                            ₹{{ item.product.price|floatformat:0 }}
+                        {% endif %}
+                    </small>
                     </div>
                 </div>
 
-                <div class="col-4 col-lg-2 d-none d-lg-block price" data-price="{{ item.product.discounted_price }}">₹{{ item.product.discounted_price|floatformat:0 }}</div>
+                <div class="col-4 col-lg-2 d-none d-lg-block price" data-price="{%if item.product.discounted_price%}{{item.product.discounted_price}}{%else%}{{item.product.price}}{%endif%}">
+                    {% if item.product.discounted_price %}
+                        ₹{{ item.product.discounted_price|floatformat:0 }}
+                    {% else %}
+                        ₹{{ item.product.price|floatformat:0 }}
+                    {% endif %}
+                </div>
 
                 <div class="col-8 col-lg-3 text-lg-center">
                     <div class="qty-control">
@@ -46,7 +58,11 @@
                 </div>
 
                 <div class="col-12 col-lg-2 text-end fw-semibold item-total">
-                    ₹{{ item.product.discounted_price|floatformat:0 }}
+                    {% if item.product.discounted_price %}
+                        ₹{{ item.product.discounted_price|floatformat:0 }}
+                    {% else %}
+                        ₹{{ item.product.price|floatformat:0 }}
+                    {% endif %}
                 </div>
                 </div>
             </div>
@@ -67,19 +83,19 @@
 
                 <div class="summary-row">
                 <span>Subtotal</span>
-                <span id="subtotal">₹280</span>
+                <span id="subtotal">₹{{ total_price }}</span>
                 </div>
 
                 <div class="summary-row">
                 <span>Shipping</span>
-                <span>₹40</span>
+                <span>₹0</span>
                 </div>
 
                 <hr>
 
                 <div class="summary-row total">
                 <span>Order Total</span>
-                <span id="orderTotal">₹320</span>
+                <span id="orderTotal">₹ {{ total_price }}</span>
                 </div>
 
                 <button class="checkout-btn mt-4">

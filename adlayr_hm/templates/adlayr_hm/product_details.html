@@ -7,7 +7,25 @@
 {% block main %}
 
   {% include "adlayr_hm/navbar.html" %}
-  <div class="container-fluid bg-black" id="pd-container">
+
+  <!-- Login Alert -->
+  <div id="loginAlert" class="glass-alert">
+    <div class="glass-bubble">
+      <span class="glass-emoji">🔐✨</span>
+
+      <div class="glass-text">
+        <strong>Please login</strong><br>
+        to add this item to your cart 🛒
+
+        <!-- CTA -->
+        <a href="{% url 'login' %}" class="glass-login-btn">
+          Login now →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" id="pd-container">
     <div class="container">
       <div class="row align-items-center g-5" id="pd-row">
 
@@ -37,7 +55,7 @@
           <h1 class="product-title">{{ product.name }}</h1>
 
           <div class="d-flex align-items-center gap-3 mb-3">
-            <span class="price">₹ {{ product.price }}</span>
+            <span class="price">₹ {{ product.discounted_price }}</span>
             <div class="rating">
               ★★★★☆
               <span class="review-text">8 Reviews</span>
@@ -51,21 +69,32 @@
           <p class="meta"><strong>Ingrediants:</strong> {{ product.ingredients }}</p>
           <p class="meta"><strong>Health Benefits:</strong> {{ product.benefits }}</p>
 
-          <div class="d-flex align-items-center gap-3 mt-4">
-            <div class="quantity-box">
-              <button onclick="updateQty(-1)">-</button>
-              <input type="text" id="qty" value="1">
-              <button onclick="updateQty(1)">+</button>
+          <form method="post">
+              {% csrf_token %}
+
+            <div class="d-flex align-items-center gap-3 mt-4">
+
+                <div class="quantity-box">
+                  <button type="button" onclick="updateQty(-1)">-</button>
+                  <input type="text" name="quantity" id="qty" value="1" readonly>
+                  <button type="button" onclick="updateQty(1)">+</button>
+                </div>
+
+                {% if not request.user.is_authenticated %}
+                  <button type="button" class="btn btn-gold" onclick="showLoginAlert()">
+                    <i class="bi bi-cart-fill"></i> ADD TO CART
+                  </button>
+                {% else %}
+                  <button type="submit" class="btn btn-gold">
+                    <i class="bi bi-cart-fill"></i> ADD TO CART
+                  </button>
+                {% endif %} 
+
+              <button class="wishlist-btn">
+                <i class="bi bi-heart"></i>
+              </button>
             </div>
-
-            <button class="btn btn-gold">
-              <i class="bi bi-cart-fill"></i> ADD TO CART
-            </button>
-
-            <button class="wishlist-btn">
-              <i class="bi bi-heart"></i>
-            </button>
-          </div>
+          </form>
         </div>
 
       </div>

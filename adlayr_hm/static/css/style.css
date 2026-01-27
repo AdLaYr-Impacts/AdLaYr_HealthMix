@@ -86,6 +86,30 @@
 }
 
 
+/* --------------------- */
+/* Cart Item Count */
+/* --------------------- */
+.cart-icon {
+  position: relative;
+  font-size: 1rem;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #ffc107;
+  color: black;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 18px;
+  text-align: center;
+  box-shadow: 0 0 6px rgba(0, 200, 83, 0.6);
+}
+
+
 
 /* banner */
 .banner {
@@ -508,4 +532,284 @@
   background: #f5b301;
   color: #000;
   transform: scale(1.15);
+}
+
+/* login alert */
+/* Glass Alert Wrapper */
+.glass-alert {
+  position: fixed !important;
+  top: 90px;
+  right: 24px;
+  left: auto !important;
+  bottom: auto;
+  z-index: 99999;
+  display: none;
+}
+
+/* Glass Bubble */
+.glass-bubble {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 16px 18px;
+  max-width: 280px;
+
+  background: rgba(20, 200, 120, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-radius: 18px 18px 6px 18px;
+  border: 1px solid rgba(0, 255, 140, 0.35);
+
+  color: #eafff4;
+  box-shadow:
+    0 8px 32px rgba(0, 255, 140, 0.25),
+    inset 0 0 12px rgba(0, 255, 140, 0.15);
+
+  animation: glassSlideIn 0.45s ease forwards;
+}
+
+/* Emoji */
+.glass-emoji {
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* Text */
+.glass-text {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.glass-text strong {
+  font-size: 15px;
+  color: #ffffff;
+}
+
+/* Animations */
+@keyframes glassSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes glassFadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(40px) scale(0.95);
+  }
+}
+
+/* Login CTA Button */
+.glass-login-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 14px;
+
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f5132;
+  text-decoration: none;
+
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 14px;
+  border: 1px solid rgba(0, 255, 140, 0.4);
+
+  transition: all 0.25s ease;
+}
+
+.glass-login-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateX(3px);
+  box-shadow: 0 6px 16px rgba(0, 255, 140, 0.35);
+}
+
+
+
+/* ----------------------- */
+/* Cart Page */
+/* ---------------------- */
+
+
+.cart-item {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: whitesmoke;
+  padding: 18px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  margin-bottom: 16px;
+}
+
+.cart-head{
+  color: white;
+  font-weight: bold;
+}
+
+.cart-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.qty-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qty-control button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #ffb703;
+  color: #fff;
+  font-size: 20px;
+}
+
+.qty {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.coupon-box {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.coupon-input{
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: whitesmoke;
+}
+
+.coupon-box input {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 50px;
+  border: 1px solid #ddd;
+}
+
+.coupon-box button {
+  padding: 12px 22px;
+  border-radius: 50px;
+  background: #ffb703;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+.cart-summary {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: whitesmoke;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 20px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.summary-row.total {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 50px;
+  border: none;
+  background: #ffb703;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+  .cart-summary {
+    position: static;
+  }
+
+  .coupon-box {
+    flex-direction: column;
+  }
+
+  .qty-control button {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+/* Login Alert Wrapper */
+.login-alert {
+  position: fixed;
+  top: 90px;
+  right: 24px;
+  z-index: 9999;
+  display: none;
+  animation: slideIn 0.4s ease forwards;
+}
+
+/* Chat Bubble */
+.alert-bubble {
+  background: linear-gradient(135deg, #1db954, #0f9d58);
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 18px 18px 4px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  box-shadow: 0 12px 30px rgba(0, 255, 120, 0.25);
+  max-width: 260px;
+  font-size: 14px;
+}
+
+/* Emoji */
+.alert-emoji {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Text */
+.alert-text strong {
+  font-size: 15px;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
 }

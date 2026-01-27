@@ -1,0 +1,111 @@
+{% extends 'base.html'  %}
+
+{% block title %}
+    <title>AdLaYr HealthMix | Product Details</title>
+{% endblock %}
+
+{% block main %}
+
+  {% include "adlayr_hm/navbar.html" %}
+
+<div class="container-fluid" id="pd-container">
+    <div class="container py-4">
+        <div class="row align-items-center g-4" id="pd-row">
+            <h3 class="fw-bold mb-4">Shopping Cart</h3>
+            <div class="col-lg-8">
+
+            <!-- Header (Hidden on mobile) -->
+            <div class="cart-header d-none d-lg-flex row fw-semibold text-muted mb-2">
+                <div class="col-5 cart-head">Product</div>
+                <div class="col-2 cart-head">Price</div>
+                <div class="col-3 text-center cart-head">Quantity</div>
+                <div class="col-2 text-end cart-head">Total</div>
+            </div>
+
+            <!-- ITEM -->
+             {% for item in cart_items %}
+            <div class="cart-item">
+                <div class="row align-items-center g-3">
+
+                <div class="col-12 col-lg-5 d-flex gap-3 align-items-center">
+                    <img src="{{ image.image.url }}" class="cart-img">
+                    <div>
+                    <h6 class="mb-1">{{ item.product.name }}</h6>
+                    <small class="text-muted d-lg-none">
+                        {% if item.product.discounted_price %}
+                            ₹{{ item.product.discounted_price|floatformat:0 }}
+                        {% else %}
+                            ₹{{ item.product.price|floatformat:0 }}
+                        {% endif %}
+                    </small>
+                    </div>
+                </div>
+
+                <div class="col-4 col-lg-2 d-none d-lg-block price" data-price="{%if item.product.discounted_price%}{{item.product.discounted_price}}{%else%}{{item.product.price}}{%endif%}">
+                    {% if item.product.discounted_price %}
+                        ₹{{ item.product.discounted_price|floatformat:0 }}
+                    {% else %}
+                        ₹{{ item.product.price|floatformat:0 }}
+                    {% endif %}
+                </div>
+
+                <div class="col-8 col-lg-3 text-lg-center">
+                    <div class="qty-control">
+                    <button onclick="changeQty(this,-1)">−</button>
+                    <span class="qty">1</span>
+                    <button onclick="changeQty(this,1)">+</button>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-2 text-end fw-semibold item-total">
+                    {% if item.product.discounted_price %}
+                        ₹{{ item.product.discounted_price|floatformat:0 }}
+                    {% else %}
+                        ₹{{ item.product.price|floatformat:0 }}
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- COUPON -->
+            <div class="coupon-box">
+                <input type="text" placeholder="Coupon code" class="coupon-input">
+                <button>Apply Coupon</button>
+            </div>
+
+            </div>
+
+            <!-- SUMMARY -->
+            <div class="col-lg-4">
+            <div class="cart-summary">
+                <h5 class="fw-bold mb-3">Cart Total</h5>
+
+                <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">₹{{ total_price }}</span>
+                </div>
+
+                <div class="summary-row">
+                <span>Shipping</span>
+                <span>₹0</span>
+                </div>
+
+                <hr>
+
+                <div class="summary-row total">
+                <span>Order Total</span>
+                <span id="orderTotal">₹ {{ total_price }}</span>
+                </div>
+
+                <button class="checkout-btn mt-4">
+                Proceed to Checkout
+                </button>
+            </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 import uuid
 
+from authentication.models import Profile
+
 # Common Model
 class BaseModel(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
@@ -92,6 +94,16 @@ class Order(BaseModel):
 
     def __str__(self):
         return f"{self.order} {self.user.username} {self.product.name} {self.quantity}"
+    
+# model to keep cart items
+class Cart(BaseModel):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="user_cart")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
+    quantity = models.IntegerField(default=1)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.product.name}, qty:{self.quantity}"
 
 # model to store rating and reviews
 class RatingAndReview(BaseModel):

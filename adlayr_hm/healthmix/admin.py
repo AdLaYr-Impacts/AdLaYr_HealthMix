@@ -14,6 +14,7 @@ from .models import(
     FAQAnswers,
     AnnouncementMessage,
     ProductDetailBannerImage,
+    Cart,
 )
 
 class BannerImageAdmin(admin.ModelAdmin):
@@ -33,6 +34,7 @@ admin.site.register(ProductVariation)
 admin.site.register(Inventory)
 admin.site.register(ProductImage)
 admin.site.register(Order)
+admin.site.register(Cart)
 admin.site.register(RatingAndReview)
 admin.site.register(UserAddress)
 admin.site.register(FAQQuestions)

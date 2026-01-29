@@ -18,8 +18,9 @@
             <div class="cart-header d-none d-lg-flex row fw-semibold text-muted mb-2">
                 <div class="col-5 cart-head">Product</div>
                 <div class="col-2 cart-head">Price</div>
-                <div class="col-3 text-center cart-head">Quantity</div>
-                <div class="col-2 text-end cart-head">Total</div>
+                <div class="col-2 text-center cart-head">Quantity</div>
+                <div class="col-1 cart-head"></div>
+                <div class="col-1 text-end cart-head">Total</div>
             </div>
 
             <!-- ITEM -->
@@ -34,6 +35,7 @@
                     <small class="text-muted d-lg-none">
                         {% if item.product.discounted_price %}
                             ₹{{ item.product.discounted_price|floatformat:0 }}
+                            <span class="price-strike"> <strike>₹ {{ item.product.price|floatformat:0 }}</strike> </span>
                         {% else %}
                             ₹{{ item.product.price|floatformat:0 }}
                         {% endif %}
@@ -44,25 +46,31 @@
                 <div class="col-4 col-lg-2 d-none d-lg-block price" data-price="{%if item.product.discounted_price%}{{item.product.discounted_price}}{%else%}{{item.product.price}}{%endif%}">
                     {% if item.product.discounted_price %}
                         ₹{{ item.product.discounted_price|floatformat:0 }}
+                        <span class="price-strike"> <strike>₹{{ item.product.price|floatformat:0 }}</strike> </span>
                     {% else %}
                         ₹{{ item.product.price|floatformat:0 }}
                     {% endif %}
                 </div>
 
-                <div class="col-8 col-lg-3 text-lg-center">
+                <div class="col-8 col-lg-2 text-lg-center">
                     <div class="qty-control">
                     <button onclick="changeQty(this,-1)">−</button>
-                    <span class="qty">1</span>
+                    <span class="qty">{{ item.quantity }}</span>
                     <button onclick="changeQty(this,1)">+</button>
                     </div>
                 </div>
 
-                <div class="col-12 col-lg-2 text-end fw-semibold item-total">
-                    {% if item.product.discounted_price %}
-                        ₹{{ item.product.discounted_price|floatformat:0 }}
-                    {% else %}
-                        ₹{{ item.product.price|floatformat:0 }}
-                    {% endif %}
+                <div class="col-2 col-lg-1 text-center">
+                    <form method="post" action="#">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-delete" title="Remove item">
+                        <i class="bi bi-trash3-fill"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="col-12 col-lg-1 text-end fw-semibold item-total">
+                    ₹{{ item.get_total_price|floatformat:0 }}
                 </div>
                 </div>
             </div>

@@ -56,6 +56,8 @@ class ProductDetailsView(View):
         #     }
         #     return render(request,'adlayr_hm/product_details.html', context=data)
 
+        print(quantity)
+
         price = Decimal(str(quantity))*(
             product.discounted_price 
             if product.discounted_price 
@@ -75,6 +77,7 @@ class CartView(View):
     def get(self,request,*args,**kwargs):
         cart_obj = Cart.objects.filter(user = request.user)
         total_price = cart_obj.aggregate(total = Sum(
+            F('quantity')*
             Case(
                 When(product__discounted_price__isnull=False,
                     then=F('product__discounted_price')),

@@ -104,6 +104,14 @@ class Cart(BaseModel):
 
     def __str__(self):
         return f"{self.product.name}, qty:{self.quantity}"
+    
+    @property
+    def get_total_price(self):
+        return self.quantity*(
+            self.product.discounted_price 
+            if self.product.discounted_price 
+            else self.product.price
+        )
 
 # model to store rating and reviews
 class RatingAndReview(BaseModel):

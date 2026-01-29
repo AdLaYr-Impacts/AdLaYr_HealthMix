@@ -374,6 +374,11 @@
 /* Product Details Page */
 /* ---------------------- */
 
+.price-strike{
+  color: white;
+  font-size: 18px;
+}
+
 #pd-container{
   height: 110vh;
 }
@@ -679,6 +684,19 @@
   min-width: 24px;
   text-align: center;
   font-weight: 600;
+}
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: #ffc107;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+  color: #ff4d4d;
+  transform: scale(1.15);
 }
 
 .coupon-box {

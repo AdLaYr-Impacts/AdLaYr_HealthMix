@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="col-2 col-lg-1 text-center">
-                    <form method="post" action="#">
+                    <form method="post" action="{% url 'cart_item_delete' item.id %}">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-delete" title="Remove item">
                         <i class="bi bi-trash3-fill"></i>

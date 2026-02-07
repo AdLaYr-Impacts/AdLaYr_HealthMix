@@ -110,9 +110,9 @@
         <ul class="dropdown-menu dropdown-menu-end bg-black border-warning shadow" aria-labelledby="profileDropdown">
           {% if user.is_authenticated %}
             <li>
-              <span class="dropdown-item text-warning fw-semibold">
+              <a href="{% url 'user_profile' %}"><span class="dropdown-item text-warning fw-semibold">
                 👋 Hii, {{ user.username }}
-              </span>
+              </span></a>
             </li>
             <li><hr class="dropdown-divider border-warning"></li>
             <li>

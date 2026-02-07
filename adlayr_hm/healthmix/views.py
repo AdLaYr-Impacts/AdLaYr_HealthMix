@@ -96,3 +96,17 @@ class CartView(View):
             "total_price":total_price,
         }
         return render(request,'adlayr_hm/cart.html', context=data)
+    
+
+class CartDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        cart_item_id = self.kwargs.get("id", None)
+        if cart_item_id:
+            cart_item = Cart.objects.filter(id=cart_item_id).first()
+            cart_item.delete()
+            return redirect("cart")
+        
+
+class UserProfileView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "adlayr_hm/user_profile.html")

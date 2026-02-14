@@ -14,7 +14,9 @@ from healthmix.models import (
     Product,
     ProductImage,
     Cart,
+    UserAddress,
 )
+from .forms import UserAddressForm
 
 class HomeView(View):
     def get(self,request,*args,**kwargs):
@@ -56,6 +58,8 @@ class ProductDetailsView(View):
         #     }
         #     return render(request,'adlayr_hm/product_details.html', context=data)
 
+        print(quantity)
+
         price = Decimal(str(quantity))*(
             product.discounted_price 
             if product.discounted_price 
@@ -75,6 +79,7 @@ class CartView(View):
     def get(self,request,*args,**kwargs):
         cart_obj = Cart.objects.filter(user = request.user)
         total_price = cart_obj.aggregate(total = Sum(
+            F('quantity')*
             Case(
                 When(product__discounted_price__isnull=False,
                     then=F('product__discounted_price')),
@@ -93,3 +98,43 @@ class CartView(View):
             "total_price":total_price,
         }
         return render(request,'adlayr_hm/cart.html', context=data)
+    
+
+class CartDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        cart_item_id = self.kwargs.get("id", None)
+        if cart_item_id:
+            cart_item = Cart.objects.filter(id=cart_item_id).first()
+            cart_item.delete()
+            return redirect("cart")
+        
+
+class UserProfileView(View):
+    form_class = UserAddressForm
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        user_addres = UserAddress.objects.filter(user=user.id).first()
+        form = self.form_class(instance=user_addres)
+        data = {
+            "user": user,
+            "user_addres": user_addres,
+            "form": form,
+        }
+        return render(request, "adlayr_hm/user_profile.html", context=data)
+    
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        user_addres = UserAddress.objects.filter(user=user.id).first()
+        form = self.form_class(request.POST, instance=user_addres)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = user
+            form.save()
+            return redirect('user_profile')
+        
+        data = {
+            "user": user,
+            "user_addres": user_addres,
+            "form": form,
+        }
+        return render(request, "adlayr_hm/user_profile.html", context=data)

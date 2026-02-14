@@ -1,0 +1,155 @@
+{% extends 'base.html'  %}
+
+{% block title %}
+    <title>User Profile | AdLaYr's HealthMix</title>
+{% endblock %}
+
+{% block main %}
+
+  {% include "adlayr_hm/navbar.html" %}
+
+<div class="container py-5 page-wrapper">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <!-- USER PROFILE CARD -->
+            <div class="profile-card">
+
+                <!-- USER INFO -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="mb-1 gold-text">Welcome, {{user.username}}</h3>
+                        <p class="mb-0 text-muted">{{user.email}}</p>
+                    </div>
+                    <a href="#" class="btn btn-outline-gold btn-sm">
+                        Edit Profile
+                    </a>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- ESSENTIAL DETAILS -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-1 text-muted">Phone</p>
+                        <h6>+91 {{uuser_addresr.phone_num}}</h6>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="mb-1 text-muted">Member Since</p>
+                        <h6>{{user.date_joined|date:"d M Y"}}</h6>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- DEFAULT ADDRESS -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="gold-text mb-0">Default Delivery Address</h5>
+                    <a href="#" class="btn btn-gold btn-sm" id="openAddressModal">
+                        + Add / Change
+                    </a>
+                </div>
+
+                {% if user_addres %}
+                <div class="address-box">
+                    <h6 class="mb-1">{{user.username}}</h6>
+                    <p class="mb-1">
+                        {{user_addres.address_line_1}}, {{user_addres.address_line_2}}
+                        {{user_addres.address_line_3}}
+                    </p>
+                    <p class="mb-1">
+                        {{user_addres.city}} - {{user_addres.pincode}}
+                    </p>
+                    <p class="mb-0">
+                        {{user_addres.state}}, India
+                    </p>
+                </div>
+                {% else %}
+                <p class="text-muted">No default address added yet.</p>
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ADDRESS MODAL: To Add New Default Address -->
+<div class="modal-overlay" id="addressModal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h4>Add / Update Address</h4>
+            <button class="close-btn" id="closeAddressModal">&times;</button>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    {{ form.mobile_number }}
+                </div>
+
+                <div class="form-group">
+                    <label>Address Line 1</label>
+                    {{ form.address_line_1 }}
+                </div>
+
+                <div class="form-group">
+                    <label>Address Line 2</label>
+                    {{ form.address_line_2 }}
+                </div>
+
+                <div class="form-group">
+                    <label>Address Line 3</label>
+                    {{ form.address_line_3 }}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>City</label>
+                        {{ form.city }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>District</label>
+                        {{ form.district }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Landmark</label>
+                    {{ form.landmark }}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Pincode</label>
+                        {{ form.pincode }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>State</label>
+                        {{ form.state }}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn-gold">
+                    Save Address
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

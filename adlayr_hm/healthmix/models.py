@@ -130,7 +130,9 @@ class RatingAndReview(BaseModel):
 class UserAddress(BaseModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_address")
     mobile_number = models.CharField(max_length=15, null=True, blank=True)
-    address = models.TextField()
+    address_line_1 = models.CharField(max_length=50, blank=True, null=True)
+    address_line_2 = models.CharField(max_length=50, blank=True, null=True)
+    address_line_3 = models.CharField(max_length=50, blank=True, null=True)
     city = models.CharField(max_length=50, blank=True, null=True)
     landmark = models.CharField(max_length=255, blank=True, null=True)
     pincode = models.CharField(max_length=10, blank=True, null=True)

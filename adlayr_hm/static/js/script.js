@@ -149,3 +149,32 @@ function updateTotals() {
   document.getElementById('subtotal').innerText = `₹${subtotal}`;
   document.getElementById('orderTotal').innerText = `₹${subtotal}`;
 }
+
+
+// ****************** //
+// Handle default address popup window
+// ***************** //
+const openBtn = document.getElementById("openAddressModal");
+const modal = document.getElementById("addressModal");
+const closeBtn = document.getElementById("closeAddressModal");
+
+function openModal() {
+    modal.classList.add("active");
+    document.body.classList.add("modal-open"); // Disable background scroll
+}
+function closeModal() {
+    modal.classList.remove("active");
+    document.body.classList.remove("modal-open"); // Enable scroll back
+}
+openBtn.addEventListener("click", openModal);
+closeBtn.addEventListener("click", closeModal);
+modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        closeModal();
+    }
+});

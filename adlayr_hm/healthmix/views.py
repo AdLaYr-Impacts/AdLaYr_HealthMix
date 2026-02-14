@@ -14,7 +14,9 @@ from healthmix.models import (
     Product,
     ProductImage,
     Cart,
+    UserAddress,
 )
+from .forms import UserAddressForm
 
 class HomeView(View):
     def get(self,request,*args,**kwargs):
@@ -108,5 +110,31 @@ class CartDeleteView(View):
         
 
 class UserProfileView(View):
+    form_class = UserAddressForm
     def get(self, request, *args, **kwargs):
-        return render(request, "adlayr_hm/user_profile.html")
+        user = request.user
+        user_addres = UserAddress.objects.filter(user=user.id).first()
+        form = self.form_class(instance=user_addres)
+        data = {
+            "user": user,
+            "user_addres": user_addres,
+            "form": form,
+        }
+        return render(request, "adlayr_hm/user_profile.html", context=data)
+    
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        user_addres = UserAddress.objects.filter(user=user.id).first()
+        form = self.form_class(request.POST, instance=user_addres)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = user
+            form.save()
+            return redirect('user_profile')
+        
+        data = {
+            "user": user,
+            "user_addres": user_addres,
+            "form": form,
+        }
+        return render(request, "adlayr_hm/user_profile.html", context=data)

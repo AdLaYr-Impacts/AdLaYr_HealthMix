@@ -136,6 +136,7 @@ function changeQty(btn, delta) {
 
 function updateTotals() {
   let subtotal = 0;
+  let totalQty = 0;
 
   document.querySelectorAll('.cart-item').forEach(item => {
     const price = parseInt(item.querySelector('.price')?.dataset.price);
@@ -144,10 +145,23 @@ function updateTotals() {
 
     item.querySelector('.item-total').innerText = `₹${total}`;
     subtotal += total;
+    totalQty += qty;
   });
 
   document.getElementById('subtotal').innerText = `₹${subtotal}`;
   document.getElementById('orderTotal').innerText = `₹${subtotal}`;
+  document.getElementById('total-qty').innerText = totalQty;
+  document.getElementById('FinalTotal').innerText = `₹${subtotal}`;
+  console.log(subtotal)
+}
+
+function openCheckout() {
+  document.getElementById("checkoutModal").style.display = "block";
+  updateTotals();
+}
+
+function closeCheckout() {
+  document.getElementById("checkoutModal").style.display = "none";
 }
 
 

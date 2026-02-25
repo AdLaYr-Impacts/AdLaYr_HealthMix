@@ -127,15 +127,20 @@ document.addEventListener("click", function (e) {
 // ********************* //
 
 function changeQty(btn, delta) {
+  const form = btn.closest("form");
+  const qtyInput = form.querySelector('.qty-input');
   const qtyEl = btn.parentElement.querySelector('.qty');
   let qty = parseInt(qtyEl.innerText);
   qty = Math.max(1, qty + delta);
   qtyEl.innerText = qty;
+  qtyInput.value = qty;
   updateTotals();
+  form.submit();
 }
 
 function updateTotals() {
   let subtotal = 0;
+  let totalQty = 0;
 
   document.querySelectorAll('.cart-item').forEach(item => {
     const price = parseInt(item.querySelector('.price')?.dataset.price);
@@ -144,16 +149,29 @@ function updateTotals() {
 
     item.querySelector('.item-total').innerText = `₹${total}`;
     subtotal += total;
+    totalQty += qty;
   });
 
   document.getElementById('subtotal').innerText = `₹${subtotal}`;
   document.getElementById('orderTotal').innerText = `₹${subtotal}`;
+  document.getElementById('total-qty').innerText = totalQty;
+  document.getElementById('FinalTotal').innerText = `₹${subtotal}`;
+  console.log(subtotal)
+}
+
+function openCheckout() {
+  document.getElementById("checkoutModal").style.display = "block";
+  updateTotals();
+}
+
+function closeCheckout() {
+  document.getElementById("checkoutModal").style.display = "none";
 }
 
 
-// ****************** //
+// ******************
 // Handle default address popup window
-// ***************** //
+// *****************
 const openBtn = document.getElementById("openAddressModal");
 const modal = document.getElementById("addressModal");
 const closeBtn = document.getElementById("closeAddressModal");

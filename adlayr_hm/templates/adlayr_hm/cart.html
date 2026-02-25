@@ -53,11 +53,15 @@
                 </div>
 
                 <div class="col-8 col-lg-2 text-lg-center">
-                    <div class="qty-control">
-                    <button onclick="changeQty(this,-1)">−</button>
-                    <span class="qty">{{ item.quantity }}</span>
-                    <button onclick="changeQty(this,1)">+</button>
-                    </div>
+                    <form method="post" action="{% url 'cart_item_update' item.id %}">
+                        {% csrf_token %}
+                        <div class="qty-control">
+                            <button type="button" onclick="changeQty(this,-1)">-</button>
+                                <input type="hidden" name="quantity" value="{{ item.quantity }}" class="qty-input" min="1">
+                                <span class="qty">{{ item.quantity }}</span>
+                            <button type="button" onclick="changeQty(this,1)">+</button>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="col-2 col-lg-1 text-center">
@@ -103,10 +107,10 @@
 
                 <div class="summary-row total">
                 <span>Order Total</span>
-                <span id="orderTotal">₹ {{ total_price }}</span>
+                <span id="orderTotal">₹{{ total_price }}</span>
                 </div>
 
-                <button class="checkout-btn mt-4">
+                <button onclick="openCheckout()" class="checkout-btn mt-4">
                 Proceed to Checkout
                 </button>
             </div>
@@ -114,6 +118,56 @@
 
         </div>
     </div>
+</div>
+
+<!-- Checkout Modal -->
+ <!-- Checkout Modal -->
+<div id="checkoutModal" class="checkout-modal">
+  <div class="checkout-content">
+
+    <div class="checkout-header">
+      <h2>Order Summary</h2>
+      <span class="close-btn" onclick="closeCheckout()">&times;</span>
+    </div>
+
+    <div class="checkout-body">
+      
+      <div class="summary-row">
+        <span>Product:</span>
+        <span>AdLaYr's HealthMix</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Quantity:</span>
+        <span id="total-qty">1</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Total Price:</span>
+        <span id="FinalTotal">₹{{ total_price }}</span>
+      </div>
+
+      <hr>
+
+      <div class="address-section">
+        <h4>Delivery Address</h4>
+        <p>
+          {{ user_addres.user.username }}<br>
+          {{ user_addres.mobile_number }}<br>
+          {{ user_addres.address_line_1 }}, {{ user_addres.address_line_2 }}<br>
+          {{ user_addres.address_line_3 }}, {{ user_addres.city }}<br>
+          {{ user_addres.district }}, {{ user_addres.state }} - {{ user_addres.pincode }}
+        </p>
+
+        <button onclick="window.location.href='{% url 'user_profile' %}'" class="change-address-btn">
+            Change Address
+        </button>
+      </div>
+
+      <button class="place-order-btn">Place Order</button>
+
+    </div>
+  </div>
 </div>
 
 {% endblock %}

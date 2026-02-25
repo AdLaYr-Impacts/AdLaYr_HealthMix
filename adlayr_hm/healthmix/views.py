@@ -38,9 +38,14 @@ class ProductDetailsView(View):
     def get(self,request,slug,*args,**kwargs):
         product = Product.objects.filter(slug_field = slug).first()
         product_images = ProductImage.objects.filter(product = product).order_by("sort_order")
+        if request.user.is_authenticated:
+            cart_item_count = Cart.objects.filter(user = request.user).count()
+        else:
+            cart_item_count = 0
         data = {
             'product': product,
             'product_images': product_images,
+            "cart_count": cart_item_count,
         }
         return render(request,'adlayr_hm/product_details.html', context=data)
     
@@ -57,8 +62,6 @@ class ProductDetailsView(View):
         #         "msg": msg
         #     }
         #     return render(request,'adlayr_hm/product_details.html', context=data)
-
-        print(quantity)
 
         price = Decimal(str(quantity))*(
             product.discounted_price 
@@ -77,7 +80,9 @@ class ProductDetailsView(View):
 
 class CartView(View):
     def get(self,request,*args,**kwargs):
-        cart_obj = Cart.objects.filter(user = request.user)
+        user = request.user
+        cart_obj = Cart.objects.filter(user = user)
+        user_addres = UserAddress.objects.filter(user=user.id).first()
         total_price = cart_obj.aggregate(total = Sum(
             F('quantity')*
             Case(
@@ -92,20 +97,39 @@ class CartView(View):
             product_image = ProductImage.objects.filter(
                 product = cart_obj.first().product
             ).order_by("sort_order").first()
+        if request.user.is_authenticated:
+            cart_item_count = Cart.objects.filter(user = request.user).count()
+        else:
+            cart_item_count = 0
         data = {
             "cart_items": cart_obj,
-            "image": product_image,
+            "image": product_image, 
             "total_price":total_price,
+            "cart_count": cart_item_count,
+            "user_addres": user_addres,
         }
         return render(request,'adlayr_hm/cart.html', context=data)
     
+
+class CartUpdateView(View):
+    def post(self,request,*args,**kwargs):
+        cart_id = self.kwargs.get("id")
+        quantity = request.POST.get("quantity")
+        if cart_id:
+            cart_item = Cart.objects.filter(id=cart_id).first()
+            if cart_item:
+                cart_item.quantity = quantity
+                cart_item.save()
+        return redirect("cart")
+        
 
 class CartDeleteView(View):
     def post(self, request, *args, **kwargs):
         cart_item_id = self.kwargs.get("id", None)
         if cart_item_id:
             cart_item = Cart.objects.filter(id=cart_item_id).first()
-            cart_item.delete()
+            if cart_item:
+                cart_item.delete()
             return redirect("cart")
         
 
@@ -115,10 +139,15 @@ class UserProfileView(View):
         user = request.user
         user_addres = UserAddress.objects.filter(user=user.id).first()
         form = self.form_class(instance=user_addres)
+        if request.user.is_authenticated:
+            cart_item_count = Cart.objects.filter(user = request.user).count()
+        else:
+            cart_item_count = 0
         data = {
             "user": user,
             "user_addres": user_addres,
             "form": form,
+            "cart_count": cart_item_count,
         }
         return render(request, "adlayr_hm/user_profile.html", context=data)
     
@@ -138,3 +167,11 @@ class UserProfileView(View):
             "form": form,
         }
         return render(request, "adlayr_hm/user_profile.html", context=data)
+    
+
+class ManageOrderViewset(View):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        data = request.data.copy()
+
+        print(data, "---", user)

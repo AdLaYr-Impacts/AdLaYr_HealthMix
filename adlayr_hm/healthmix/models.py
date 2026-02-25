@@ -129,7 +129,7 @@ class RatingAndReview(BaseModel):
 # model to keep user address
 class UserAddress(BaseModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_address")
-    mobile_number = models.CharField(max_length=15, null=True, blank=True)
+    mobile_number = models.CharField(max_length=10, null=True, blank=True)
     address_line_1 = models.CharField(max_length=50, blank=True, null=True)
     address_line_2 = models.CharField(max_length=50, blank=True, null=True)
     address_line_3 = models.CharField(max_length=50, blank=True, null=True)

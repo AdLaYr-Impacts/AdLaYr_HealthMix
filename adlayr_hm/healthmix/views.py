@@ -111,12 +111,25 @@ class CartView(View):
         return render(request,'adlayr_hm/cart.html', context=data)
     
 
+class CartUpdateView(View):
+    def post(self,request,*args,**kwargs):
+        cart_id = self.kwargs.get("id")
+        quantity = request.POST.get("quantity")
+        if cart_id:
+            cart_item = Cart.objects.filter(id=cart_id).first()
+            if cart_item:
+                cart_item.quantity = quantity
+                cart_item.save()
+        return redirect("cart")
+        
+
 class CartDeleteView(View):
     def post(self, request, *args, **kwargs):
         cart_item_id = self.kwargs.get("id", None)
         if cart_item_id:
             cart_item = Cart.objects.filter(id=cart_item_id).first()
-            cart_item.delete()
+            if cart_item:
+                cart_item.delete()
             return redirect("cart")
         
 
@@ -157,5 +170,8 @@ class UserProfileView(View):
     
 
 class ManageOrderViewset(View):
-     def post(self, request, *args, **kwargs):
-         pass
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        data = request.data.copy()
+
+        print(data, "---", user)

@@ -53,11 +53,15 @@
                 </div>
 
                 <div class="col-8 col-lg-2 text-lg-center">
-                    <div class="qty-control">
-                    <button onclick="changeQty(this,-1)">−</button>
-                    <span class="qty">{{ item.quantity }}</span>
-                    <button onclick="changeQty(this,1)">+</button>
-                    </div>
+                    <form method="post" action="{% url 'cart_item_update' item.id %}">
+                        {% csrf_token %}
+                        <div class="qty-control">
+                            <button type="button" onclick="changeQty(this,-1)">-</button>
+                                <input type="hidden" name="quantity" value="{{ item.quantity }}" class="qty-input" min="1">
+                                <span class="qty">{{ item.quantity }}</span>
+                            <button type="button" onclick="changeQty(this,1)">+</button>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="col-2 col-lg-1 text-center">

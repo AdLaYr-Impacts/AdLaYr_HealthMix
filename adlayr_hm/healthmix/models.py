@@ -84,11 +84,11 @@ class Order(BaseModel):
         ('cancelled', 'Cancelled'),
     ]
 
-    order = models.CharField(max_length=30)
+    order = models.CharField(max_length=30, null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_order")
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    weight_variation = models.ForeignKey(ProductVariation, on_delete=models.CASCADE) # need update
+    weight_variation = models.ForeignKey(ProductVariation, on_delete=models.CASCADE, null=True, blank=True) # need update
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     user_address = models.ForeignKey("UserAddress", on_delete=models.SET_NULL, null=True, blank=True)
 

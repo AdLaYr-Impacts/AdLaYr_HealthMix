@@ -15,8 +15,10 @@ from healthmix.models import (
     ProductImage,
     Cart,
     UserAddress,
+    Order,
 )
 from .forms import UserAddressForm
+from common.helper import generate_order_number
 
 class HomeView(View):
     def get(self,request,*args,**kwargs):
@@ -172,6 +174,24 @@ class UserProfileView(View):
 class ManageOrderViewset(View):
     def post(self, request, *args, **kwargs):
         user = request.user
-        data = request.data.copy()
+        cart_obj = Cart.objects.filter(user = user)
+        user_addres = UserAddress.objects.filter(user=user.id).first()
+        product = Product.objects.get(id=cart_obj.first().product.id)
+        quantity = cart_obj.aggregate(total_quantity = Sum("quantity"))['total_quantity']
+        price = quantity*(
+            product.discounted_price if product.discounted_price
+            else product.price
+        )
+        
+        order = Order.objects.create(
+            # order = generate_order_number(user),
+            user = user,
+            product = product,
+            quantity = quantity,
+            total_price = price,
+            user_address = user_addres
+        )
+        order.order = f"ORD{order.id:07d}"
+        order.save()
 
-        print(data, "---", user)
+        return redirect("cart") # only for temporary

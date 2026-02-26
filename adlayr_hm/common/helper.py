@@ -8,6 +8,7 @@ from authentication.models import OTP
 from datetime import timedelta
 from django.utils import timezone
 from django.db.models import Q
+from healthmix.models import Order
 
 # to send email in parallel thread
 def execute_in_background(function):
@@ -65,3 +66,12 @@ def generate_otp(email):
             new_otp.save()
             return otp
         otp = 0
+
+# to generate order number
+def generate_order_number(user):
+    last_order = Order.objects.filter(user=user).last()
+    order_number = 1
+    if last_order:
+        last_order_number = int(last_order.order[3:])
+        order_number += last_order_number
+    return f"ORD{order_number:07d}"
